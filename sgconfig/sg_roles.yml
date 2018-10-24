@@ -149,11 +149,15 @@ sg_manage_snapshots:
 # Allows each user to access own named index
 sg_own_index:
   cluster:
+    - CLUSTER_MONITOR
     - CLUSTER_COMPOSITE_OPS
+    - indices:admin/template/get
+    - indices:admin/template/put
   indices:
-    '${user_name}':
+    '${user_name}*':
       '*':
-        - INDICES_ALL
+        - CRUD
+        - CREATE_INDEX
 
 ### X-Pack COMPATIBILITY
 sg_xp_monitoring:
