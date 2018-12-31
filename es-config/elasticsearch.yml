@@ -6,6 +6,9 @@ network.host: 0.0.0.0
 # Details: https://github.com/elastic/elasticsearch/pull/17288
 discovery.zen.minimum_master_nodes: 1
 
+# Increase thread pool queue from default(200) to 1000
+thread_pool.write.queue_size: 1000
+
 ######## Start Search Guard Demo Configuration ########
 # WARNING: revise all the lines below before you go into production
 searchguard.ssl.transport.pemcert_filepath: esnode.pem
