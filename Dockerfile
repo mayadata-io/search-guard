@@ -11,6 +11,8 @@ COPY ./es-config/elasticsearch.yml ./config/elasticsearch.yml
 
 USER root
 RUN chown elasticsearch:elasticsearch config/elasticsearch.yml
+RUN mkdir -p snapshot-restore
+RUN chmod 0777 snapshot-restore
 
 USER elasticsearch
 EXPOSE 9200 9300
