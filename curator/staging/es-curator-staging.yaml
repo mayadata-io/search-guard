@@ -1,0 +1,34 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: elasticsearch-curator
+spec:
+  schedule: "0 19 * * *"
+  successfulJobsHistoryLimit: 3 # how many completed jobs should be kept
+  failedJobsHistoryLimit: 3 # how many failed jobs should be kept
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: elasticsearch-curator-cronjob
+              image: mayadataio/maya-curator:b504e669
+              imagePullPolicy: Always
+              command: ["/bin/bash"]
+              args: ["-c", "curator --config /usr/share/curator/config.yaml /usr/share/curator/action.yaml"]
+              volumeMounts:
+              - name: curator-config-files
+                mountPath: /usr/share/curator
+              ports:
+                - containerPort: 80
+          imagePullSecrets:
+          - name: mayadatasecret
+          volumes:
+          - name: curator-config-files
+            projected:
+              sources:
+              - configMap:
+                  name: elasticsearch-curator-action
+              - configMap:
+                  name: elasticsearch-curator-config
