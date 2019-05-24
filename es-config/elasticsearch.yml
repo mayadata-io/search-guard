@@ -36,3 +36,6 @@ cluster.routing.allocation.disk.threshold_enabled: false
 node.max_local_storage_nodes: 3
 searchguard.enterprise_modules_enabled: false
 ######## End Search Guard Demo Configuration ########
+
+# disable x-pack security as it conflicts with search guard.
+xpack.security.enabled: false
