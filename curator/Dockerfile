@@ -8,4 +8,4 @@ RUN yum --enablerepo=extras -y install epel-release
 
 RUN yum -y install python-pip
 
-RUN pip install -U elasticsearch-curator==5.5.4
+RUN pip install -U elasticsearch-curator==5.8.1
